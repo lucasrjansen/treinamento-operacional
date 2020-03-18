@@ -1,0 +1,35 @@
+<div>
+    <div class="modal-header">
+        <h4 class="ml-auto">Informações da Encomenda</h4>
+        <a class="close" aria-label="Close" (click)="activeModal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </a>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            Rua {{encomenda.destinatario.rua}}, {{encomenda.destinatario.numero}}
+        </div>
+        <div class="row">
+            {{encomenda.destinatario.cidade}} - {{encomenda.destinatario.estado}}
+        </div>
+
+        <div class="row">
+            {{encomenda.destinatario.cep}}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <span>Datas</span>
+            <span>Retirada:</span> {{encomenda.dtRetirada || 'dd/MM/yyyy'}}
+            <span>Entrega:</span> {{encomenda.dtEntrega || 'dd/MM/yyyy'}}
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <span>Assinatura do destinátario</span>
+            <img src="../../../../assets/images/assinatura.jpg">
+        </div>
+    </div>
+</div>

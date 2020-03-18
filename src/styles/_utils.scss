@@ -1,0 +1,70 @@
+
+// Alteração para dropdown Acoes
+.dropdown-menu {
+    padding: 0px;
+}
+
+.dropdown-item{
+    padding: .15rem .60rem !important;
+}
+////
+
+.panel-cadastro{
+    background-color: white;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.dropdown-toggle::after{
+    display: none !important;
+}
+
+table {
+    width: 100%;
+    margin: 0 auto; 
+}
+
+.table-content{
+    margin-top: 10px;
+    position: relative;
+}
+
+.mat-cell{
+    color: grey;
+}
+
+.mat-header-cell{
+    color: black;
+}
+
+mat-form-field {
+    margin-top: -8px;
+}
+
+mat-paginator{
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.disabled{
+    background-color: #e9ecef;
+}
+
+.circulo {
+	width: 35px;
+	height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    color: grey;
+    float: left;
+    height: 35px;
+    line-height: 35px;
+}
+
+.text-area{
+    border: 1px solid;
+    padding: 8px;
+    text-align: justify;
+    margin: 0 auto;
+}

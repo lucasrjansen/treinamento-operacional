@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Components
 import { HomeComponent } from './home.component';
 import { PageHeaderModule } from 'src/app/shared/components';
+import { DashboardBarsModule } from 'src/app/shared/components/dashboard/';
 
 @NgModule({
     imports: [
@@ -13,7 +14,8 @@ import { PageHeaderModule } from 'src/app/shared/components';
         HomeRoutingModule,
         FormsModule,
         ReactiveFormsModule,
-        PageHeaderModule
+        PageHeaderModule,
+        DashboardBarsModule
     ],
     declarations: [
         HomeComponent

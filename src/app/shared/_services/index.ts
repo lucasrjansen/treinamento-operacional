@@ -5,3 +5,4 @@ export * from './Entregador.service';
 export * from './Encomenda.service';
 export * from './Problema.service';
 export * from './Service';
+export * from './Dashboard-service';

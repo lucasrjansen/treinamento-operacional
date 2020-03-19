@@ -6,7 +6,7 @@ import { LayoutComponent } from './layout.component';
 import { HeaderComponent } from './header/header.component';
 
 import {
-    EntregadorService, EncomendaService, DestinatarioService, ProblemaService
+    EntregadorService, EncomendaService, DestinatarioService, ProblemaService, DashboardService
 } from '../shared/_services/';
 
 @NgModule({
@@ -23,7 +23,8 @@ import {
         EntregadorService,
         EncomendaService,
         DestinatarioService,
-        ProblemaService
+        ProblemaService,
+        DashboardService
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA

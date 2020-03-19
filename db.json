@@ -77,74 +77,24 @@
         "dtRetirada": "2020-01-25"
       },
       "descricao": "Destinatário ausente."
+    }
+  ],
+  "encomendasPorEntregador": [
+    {
+      "nome": "Lucas Janzen",
+      "qtdEncomendas": 4
     },
     {
-      "id": 2,
-      "encomenda": {
-        "id": 1,
-        "destinatario": {
-          "id": 1,
-          "nome": "Antonio",
-          "rua": "Joiville",
-          "numero": 580,
-          "complemento": "",
-          "cidade": "Apiúna",
-          "estado": "Santa Catarina",
-          "cep": "89135000"
-        },
-        "entregador": {
-          "id": 1,
-          "foto": null,
-          "nome": "Lucas Janzen",
-          "email": "lucas.janzen@gmail.com"
-        },
-        "produto": "Notebook Dell",
-        "status": "ENTREGUE",
-        "dtEntrega": "2020-01-25",
-        "dtRetirada": "2020-01-25"
-      },
-      "entregador": {
-        "id": 1,
-        "foto": null,
-        "nome": "Lucas Janzen",
-        "email": "lucas.janzen@gmail.com"
-      },
-      "status": "ENTREGUE",
-      "descricao": null
+      "nome": "Gabriel Raimondi",
+      "qtdEncomendas": 7
     },
     {
-      "id": 3,
-      "encomenda": {
-        "id": 1,
-        "destinatario": {
-          "id": 1,
-          "nome": "Antonio",
-          "rua": "Joiville",
-          "numero": 580,
-          "complemento": "",
-          "cidade": "Apiúna",
-          "estado": "Santa Catarina",
-          "cep": "89135000"
-        },
-        "entregador": {
-          "id": 1,
-          "foto": null,
-          "nome": "Lucas Janzen",
-          "email": "lucas.janzen@gmail.com"
-        },
-        "produto": "Notebook Dell",
-        "status": "ENTREGUE",
-        "dtEntrega": "2020-01-25",
-        "dtRetirada": "2020-01-25"
-      },
-      "entregador": {
-        "id": 1,
-        "foto": null,
-        "nome": "Lucas Janzen",
-        "email": "lucas.janzen@gmail.com"
-      },
-      "status": "ENTREGUE",
-      "descricao": "adasdasdas"
+      "nome": "Ivens Muller",
+      "qtdEncomendas": 13
+    },
+    {
+      "nome": "Plabo Depine",
+      "qtdEncomendas": 8
     }
   ]
 }

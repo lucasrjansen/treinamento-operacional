@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg fixed-top">
+
+    <a class="navbar-brand" href="#">
+        <img id="imagem" src="../../assets/images/fastfeet.png" />
+    </a>
+
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" [routerLink]="['/encomendas']" [routerLinkActive]="['router-link-active']">
+                ENCOMENDAS
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/entregadores']" [routerLinkActive]="['router-link-active']">
+                ENTREGADORES
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/destinatarios']" [routerLinkActive]="['router-link-active']">
+                DESTINATÁRIOS
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/problemas']" [routerLinkActive]="['router-link-active']">
+                PROBLEMAS
+            </a>
+        </li>
+    </ul>
+
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <span>{{nomeUsuario}}</span>
+                <a [routerLink]="['/login']" (click)="deslogar()" class="nav-link">
+                    <span class="text-bolder btn-sair">Sair do sistema</span>
+                    <b class="caret"></b>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

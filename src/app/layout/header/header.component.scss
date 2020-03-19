@@ -1,0 +1,29 @@
+
+$topnav-background-color: #FFF;
+
+img{
+    padding: 10px;
+    width: 140px;
+    height: 40px;
+}
+
+.dropdown-menu{
+    margin-left: 15px;
+}
+
+:host {
+    .navbar {
+        box-shadow: 0 0 2px 1px grey;
+        font-weight: bold;
+        background-color: $topnav-background-color;
+        .navbar-brand {
+            color: grey;
+        }
+        .nav-item > a {
+            color: grey;
+            &:hover {
+                color: black;
+            }
+        }
+    }
+}

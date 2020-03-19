@@ -1,0 +1,59 @@
+<div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-7">
+
+            <div class="row justify-content-center">
+                <div class="col-11 col-sm-6 col-md-8 col-lg-6 col-xl-8">
+                    <app-page-header *ngIf="this.encomenda == null" [heading]="'Cadastro de encomenda'">
+                    </app-page-header>
+
+                    <app-page-header *ngIf="this.encomenda != null" [heading]="'Edição de encomenda'">
+                    </app-page-header>
+                </div>
+                <div class="col-7 col-sm-5 col-md-3 col-lg-5 col-xl-4">
+                    <div class="row justify-content-sm-end">
+
+                        <btn-voltar [routerLink]="['/encomendas']" [routerLinkActive]="['router-link-active']">
+                        </btn-voltar>
+                        &nbsp;
+                        <btn-salvar [disabled]="!form.valid" (click)="adicionar()"></btn-salvar>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row ml-auto justify-content-md-center">
+        <div class="panel-cadastro col-7">
+
+            <form [formGroup]="form">
+                <div class="row">
+                    <div class="col-6">
+                        <span>Destinatário</span>
+                        <mat-select class="form-control" [formControl]="selDestinatario">
+                            <mat-option *ngFor="let destinatario of listaDestinatarios" [value]="destinatario.id">
+                                {{destinatario.nome}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                    <div class="col-6">
+                        <span>Entregador</span>
+                        <mat-select class="form-control" [formControl]="selEntregador">
+                            <mat-option *ngFor="let entregador of listaEntregadores" [value]="entregador.id">
+                                {{entregador.nome}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <span>Produto</span>
+                        <input type="text" class="form-control" formControlName="produto" required>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

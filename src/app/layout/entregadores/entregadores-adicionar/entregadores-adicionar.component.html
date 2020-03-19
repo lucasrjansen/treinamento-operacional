@@ -1,0 +1,51 @@
+<div class="row ml-auto justify-content-md-center">
+    <div class="col-8">
+        <div class="row">
+            <div class="col-6">
+                <app-page-header *ngIf="this.entregador == null" [heading]="'Cadastro de entregadores'">
+                </app-page-header>
+
+                <app-page-header *ngIf="this.entregador != null" [heading]="'Edição de Entregadores'">
+                </app-page-header>
+
+                <!--
+                <span *ngIf="this.entregador == null">Cadastro de entregadores </span>
+                    <span *ngIf="this.entregador != null">Edição de Entregadores </span>-->
+            </div>
+            <div class="col-5">
+                <div class="row justify-content-end">
+
+                    <btn-voltar [routerLink]="['/entregadores']" [routerLinkActive]="['router-link-active']">
+                    </btn-voltar>
+                    
+                    <btn-salvar [disabled]="!form.valid" (click)="salvar()"></btn-salvar>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row ml-auto justify-content-md-center">
+    <div class="panel-cadastro col-7">
+        <form [formGroup]="form">
+            <div class="row">
+                <div class="panel-foto col-12">
+                    <i class="material-icons"> crop_original </i>
+                    <span>ADICIONAR FOTO</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 ">
+                    <span>Nome</span>
+                    <input type="text" class="form-control" formControlName="nome" autofocus required>
+                </div>
+                <div class="col-12">
+                    <span>Email</span>
+                    <input type="text" class="form-control" formControlName="email" required>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { SessionStorageService, EntregadorService } from 'src/app/shared/_services';
 import { Entregador } from 'src/app/shared/_models';
-import { ToastService } from 'angular-toastify';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
     selector: 'app-entregadores-adicionar',
@@ -22,7 +22,7 @@ export class EntregadoresAdicionarComponent implements OnInit, OnDestroy {
         private formBuilder: FormBuilder,
         private sessionStorageService: SessionStorageService,
         private entregadorService: EntregadorService,
-        private _toastService: ToastService
+        private notifier: NotifierService
     ) { }
 
     ngOnInit() {
@@ -61,15 +61,18 @@ export class EntregadoresAdicionarComponent implements OnInit, OnDestroy {
         let retorno: Entregador;
         this.entregadorService.adicionar(this.montarEntregador()).subscribe(ret => {
             retorno = ret;
-        }, err => { },
-            () => {
-                if (retorno) {
 
-                    this._toastService.success(`Entregador cadastrado com Sucesso!`);
-                    //alert(`Entregador cadastrado com Sucesso!`)
-                    this.router.navigate(['/entregadores']);
-                }
-            });
+        }, err => {
+            console.log(err);
+            this.notifier.notify('success', 'Entregador não cadastrado, tente novamente!');
+
+        }, () => {
+            
+            if (retorno) {
+                this.notifier.notify('success', 'Entregador cadastrado com Sucesso!');
+                this.router.navigate(['/entregadores']);
+            }
+        });
     }
 
     alterar() {
@@ -78,15 +81,17 @@ export class EntregadoresAdicionarComponent implements OnInit, OnDestroy {
         let retorno: Entregador;
         this.entregadorService.alterar(this.montarEntregador()).subscribe(ret => {
             retorno = ret;
-        }, err => { },
-            () => {
-                if (retorno) {
+        }, err => {
+            console.log(err);
+            this.notifier.notify('success', 'Entregador não editado, tente novamente!');
 
-                    this._toastService.success(`Entregador editado com Sucesso!`);
-                    //alert(`Entregador editado com Sucesso!`)
-                    this.router.navigate(['/entregadores']);
-                }
-            });
+        }, () => {
+
+            if (retorno) {
+                this.notifier.notify('success', 'Entregador editado com Sucesso!');
+                this.router.navigate(['/entregadores']);
+            }
+        });
     }
 
     montarEntregador(): Entregador {

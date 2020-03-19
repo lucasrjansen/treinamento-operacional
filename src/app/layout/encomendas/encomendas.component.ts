@@ -6,6 +6,7 @@ import { Encomenda } from 'src/app/shared/_models/Encomenda';
 import { configurarPaginador } from 'src/app/shared/utils';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VisualizarEncomendaComponent } from './visualizar-encomenda/visualizar-encomenda.component';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-encomendas',
@@ -24,7 +25,8 @@ export class EncomendasComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     private sessionStorageService: SessionStorageService,
-    private encomendaService: EncomendaService
+    private encomendaService: EncomendaService,
+    private notifier: NotifierService,
   ) { }
 
   ngOnInit(): void {
@@ -47,21 +49,29 @@ export class EncomendasComponent implements OnInit {
     this.sessionStorageService.setValue('editEncomenda', encomenda)
   }
 
-
   excluir(encomenda: Encomenda) {
 
     let retorno: Encomenda;
     this.encomendaService.deletar(encomenda.id).subscribe(ret => {
       retorno = ret;
 
-    }, err => { },
+    }, err => {
+      console.log(err);
+      this.notifier.notify('error', 'Encomenda não excluída, tente novamente!');
+
+    },
       () => {
         if (retorno) {
 
-          alert(`Encomenda excluído com Sucesso!`)
-          location.reload();
+          this.notifier.notify('success', 'Encomenda excluída com Sucesso!');
+           //location.reload();
         }
       })
+  }
+
+  adicionarProblema(encomenda: Encomenda) {
+    this.sessionStorageService.setValue('cadProblema', encomenda);
+    this.router.navigate(['/problemas-adicionar']);
   }
 
   aplicarFiltro(valor: string) {

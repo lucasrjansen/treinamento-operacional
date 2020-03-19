@@ -53,30 +53,6 @@
       "status": "ENTREGUE",
       "dtEntrega": "2020-01-25",
       "dtRetirada": "2020-01-25"
-    },
-    {
-      "id": 2,
-      "destinatario": {
-        "id": 1,
-        "nome": "Antonio",
-        "rua": "Joiville",
-        "numero": 580,
-        "complemento": "",
-        "cidade": "Apiúna",
-        "estado": "Santa Catarina",
-        "cep": "89135000"
-      },
-      "entregador": {
-        "id": 2,
-        "nome": "Lucas Janze",
-        "foto": null,
-        "email": "lucas.janzen@gmail.com",
-        "senha": "senha"
-      },
-      "produto": "teste",
-      "status": "PENDENTE",
-      "dtEntrega": "2020-01-25",
-      "dtRetirada": "2020-01-25"
     }
   ],
   "problema": [
@@ -101,6 +77,74 @@
         "dtRetirada": "2020-01-25"
       },
       "descricao": "Destinatário ausente."
+    },
+    {
+      "id": 2,
+      "encomenda": {
+        "id": 1,
+        "destinatario": {
+          "id": 1,
+          "nome": "Antonio",
+          "rua": "Joiville",
+          "numero": 580,
+          "complemento": "",
+          "cidade": "Apiúna",
+          "estado": "Santa Catarina",
+          "cep": "89135000"
+        },
+        "entregador": {
+          "id": 1,
+          "foto": null,
+          "nome": "Lucas Janzen",
+          "email": "lucas.janzen@gmail.com"
+        },
+        "produto": "Notebook Dell",
+        "status": "ENTREGUE",
+        "dtEntrega": "2020-01-25",
+        "dtRetirada": "2020-01-25"
+      },
+      "entregador": {
+        "id": 1,
+        "foto": null,
+        "nome": "Lucas Janzen",
+        "email": "lucas.janzen@gmail.com"
+      },
+      "status": "ENTREGUE",
+      "descricao": null
+    },
+    {
+      "id": 3,
+      "encomenda": {
+        "id": 1,
+        "destinatario": {
+          "id": 1,
+          "nome": "Antonio",
+          "rua": "Joiville",
+          "numero": 580,
+          "complemento": "",
+          "cidade": "Apiúna",
+          "estado": "Santa Catarina",
+          "cep": "89135000"
+        },
+        "entregador": {
+          "id": 1,
+          "foto": null,
+          "nome": "Lucas Janzen",
+          "email": "lucas.janzen@gmail.com"
+        },
+        "produto": "Notebook Dell",
+        "status": "ENTREGUE",
+        "dtEntrega": "2020-01-25",
+        "dtRetirada": "2020-01-25"
+      },
+      "entregador": {
+        "id": 1,
+        "foto": null,
+        "nome": "Lucas Janzen",
+        "email": "lucas.janzen@gmail.com"
+      },
+      "status": "ENTREGUE",
+      "descricao": "adasdasdas"
     }
   ]
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { configurarPaginador } from 'src/app/shared/utils';
 import { Destinatario } from 'src/app/shared/_models';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-destinatarios',
@@ -21,7 +22,8 @@ export class DestinatariosComponent implements OnInit {
   constructor(
     private router: Router,
     private sessionStorageService: SessionStorageService,
-    private destinatarioService: DestinatarioService
+    private destinatarioService: DestinatarioService,
+    private notifier: NotifierService
   ) { }
 
   ngOnInit(): void {
@@ -47,14 +49,17 @@ export class DestinatariosComponent implements OnInit {
     this.destinatarioService.deletar(destinatario.id).subscribe(ret => {
       retorno = ret;
 
-    }, err => { },
-      () => {
-        if (retorno) {
+    }, err => {
+      console.log(err);
+      this.notifier.notify('error', 'Destinatário não excluído, tente novamente!');
 
-          alert(`Destinatário excluído com Sucesso!`)
-          location.reload();
-        }
-      })
+    }, () => {
+      if (retorno) {
+
+        this.notifier.notify('success', 'Destinatário excluído com Sucesso!');
+        //location.reload();
+      }
+    });
   }
 
   aplicarFiltro(valor: string) {

@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Date Picker
 import { MatFormFieldModule, MatInputModule, MatCheckboxModule } from '@angular/material';
 import { BtnSalvarModule, BtnVoltarModule } from 'src/app/shared/components/buttons';
-import { AngularToastifyModule } from 'angular-toastify';
 
 @NgModule({
     imports: [

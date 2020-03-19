@@ -9,4 +9,8 @@ export class ProblemaService extends Service {
         return this.http.get<Problema[]>(`${API.URL}/problema`);
     }
 
+    adicionar(problema: Problema): Observable<Problema> {
+        return this.http.post<Problema>(`${API.URL}/problema`, problema);
+    }
+
 }

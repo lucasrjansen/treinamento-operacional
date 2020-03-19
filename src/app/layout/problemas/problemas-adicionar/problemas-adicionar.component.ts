@@ -3,71 +3,79 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { SessionStorageService, ProblemaService } from 'src/app/shared/_services';
-import { Problema } from 'src/app/shared/_models';
+import { Problema, Encomenda } from 'src/app/shared/_models';
+import { NotifierService } from 'angular-notifier';
+
+export const status = ['ENTREGUE', 'CANCELADO', 'PENDENTE', 'RETIRADA'];
 
 @Component({
     selector: 'app-problemas-adicionar',
     templateUrl: './problemas-adicionar.component.html',
     styleUrls: ['./problemas-adicionar.component.scss'],
 })
-
 export class ProblemasAdicionarComponent implements OnInit, OnDestroy {
 
-    problema: Problema;
     form: FormGroup;
+    selStatus: string;
+    encomenda: Encomenda;
+    listaStatus = status;
 
     constructor(
+        private notifier: NotifierService,
         private router: Router,
         private formBuilder: FormBuilder,
         private sessionStorageService: SessionStorageService,
-        private problemaService: ProblemaService
+        private problemaService: ProblemaService,
     ) { }
 
     ngOnInit() {
-
+        this.encomenda = this.sessionStorageService.getValue('cadProblema');
         this.criarFormulario();
     }
 
     ngOnDestroy() {
-
+        this.sessionStorageService.setValue('cadProblema');
     }
 
     criarFormulario() {
 
-        this.form = this.formBuilder.group({
-            nome: [null, Validators.compose([Validators.required])],
-            email: [null, Validators.compose([Validators.required])]
-        });
+        if (this.encomenda) {
+            this.form = this.formBuilder.group({
+                descricao: [null, Validators.compose([Validators.required])]
+            });
 
-    }
+            this.selStatus = this.encomenda.status;
+        }
 
-    salvar() {
-        //this.problema != null ? this.alterar() : this.adicionar();
     }
 
     adicionar() {
 
         let retorno: Problema;
-        /*this.problema.adicionar(this.montarEntregador()).subscribe(ret => {
+        this.problemaService.adicionar(this.montarProblema()).subscribe(ret => {
             retorno = ret;
-        }, err => { },
-            () => {
-                if (retorno) {
 
-                    alert(`Entregador cadastrado com Sucesso!`)
-                    this.router.navigate(['/problemas']);
-                }
-            });*/
+        }, err => {
+            console.log(err);
+            this.notifier.notify("error", "Problema não cadastrado, tente novamente.");
+
+        }, () => {
+
+            if (retorno) {
+                this.notifier.notify("success", "Problema cadastrado com Sucesso!");
+                this.router.navigate(['/encomendas']);
+            }
+        });
     }
 
     montarProblema(): Problema {
 
         return {
             id: 0,//this.problema ? this.problema.id : 0,
-            encomenda: null,
-            entregador: null,
-            status: '',
-            descricao: ''
+            encomenda: this.encomenda,
+            entregador: this.encomenda.entregador,
+            status: this.selStatus,
+            descricao: this.form.value.descricao
         };
     }
 }

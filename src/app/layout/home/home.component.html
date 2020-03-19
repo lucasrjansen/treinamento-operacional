@@ -1,5 +1,22 @@
 <div>
     <!--<app-page-header [heading]="'Home'"></app-page-header>-->
-    
-    
+
+    Preciso fazer:
+    Qtd Encomendas x Entregador
+    Qtd Problemas x Entregador
+    Qtd Encomendas x Estado
+    Qtd Encomendas x Cidade
+    Qtd Encomendas x Cliente
+    encomendas por mês
+    -----
+    pra cada gráfico, coloca uma opção pro usuário escolher se ele quer de barras ou de pizza
+
+    esse último pode deixar fixo um gráfico de linhas
+
+    <div class="row">
+        <div *ngIf="carregar" class="col-10">
+            <dashboard-bars tittle="Encomendas por Entregador" [dashboardData]="dadosEncomendasPorEntregador"></dashboard-bars>
+        </div>
+    </div>
+
 </div>

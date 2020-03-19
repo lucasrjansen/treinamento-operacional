@@ -1,7 +1,6 @@
-<div class="pies-container">
+<div class="">
     <dx-chart
         [title]="title"
-        palette="Violet"
         [dataSource]="options.dataSource">
 
         <dxi-series
@@ -10,7 +9,8 @@
             [name]="info.description">
         </dxi-series>
 
-        <dxo-common-series-settings #seriesSettings
+        <dxo-common-series-settings 
+            #seriesSettings
             [argumentField]="options.valueId"
             [type]="'line'">
         </dxo-common-series-settings>

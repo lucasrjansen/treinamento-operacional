@@ -10,10 +10,13 @@ import { DashboardService } from 'src/app/shared/_services';
 export class HomeComponent implements OnInit {
 
     encomendasEntregador: EncomendasEntregador[];
+
     dadosEncomendasPorMes: DashboardOptions;
     dadosEncomendasPorEntregador: DashboardOptions;
-    carregar = false;
+    dadosProblemasPorEntregador: DashboardOptions;
 
+    carregar = false;
+    
     constructor(private dashboardService: DashboardService) { }
 
     ngOnInit() {
@@ -27,6 +30,26 @@ export class HomeComponent implements OnInit {
 
         })
         this.montarDashboardData();
+    }
+
+    buscarElemento(selector: string): Element {
+        return document.querySelector(`#${selector}`);
+    }
+
+    trocarGrafico(iconId: string) {
+        
+        let icon = this.buscarElemento(iconId);
+        icon.textContent = icon.textContent.trim() == 'pie_chart' ? 'bar_chart' : 'pie_chart';
+    }
+
+    validarGrafico(iconeGrafico: string, iconId: string): Boolean {
+        
+        let icon = this.buscarElemento(iconId);
+       
+        if(iconeGrafico.trim() != icon.textContent.trim()){
+            return true
+        }
+        return false
     }
 
     montarDashboardData() {
@@ -43,6 +66,12 @@ export class HomeComponent implements OnInit {
             dataSource: encomendasPorMes
         }
 
+        this.dadosProblemasPorEntregador = {
+            infos: this.montarDashboardInfo(),
+            valueId: 'nome',
+            dataSource: problemasPorEntregador
+        }
+
         console.log('montarDashboardDados');
         console.log(this.dadosEncomendasPorEntregador);
     }
@@ -51,7 +80,7 @@ export class HomeComponent implements OnInit {
         let dashboardInfo = new Array<DashboardInfo>();
 
         let info: DashboardInfo = {
-            valueName: 'qtdEncomendas',
+            valueName: 'quantidade',
             description: 'Encomendas'
         }
 
@@ -60,55 +89,74 @@ export class HomeComponent implements OnInit {
     }
 }
 
+export const problemasPorEntregador = [
+    {
+        nome: "Lucas Janzen",
+        quantidade: 7
+    },
+    {
+        nome: "Gabriel Raimondi",
+        quantidade: 0
+    },
+    {
+        nome: "Ivens Muller",
+        quantidade: 2
+    },
+    {
+        nome: "Plabo Depine",
+        quantidade: 4
+    }
+]
+
 
 export const encomendasPorMes = [
     {
         nome: 'Janeiro',
-        qtdEncomendas: 17
+        quantidade: 17
     },
     {
         nome: 'Fevereiro',
-        qtdEncomendas: 12
+        quantidade: 12
     },
     {
         nome: 'Março',
-        qtdEncomendas: 4
+        quantidade: 4
     },
     {
         nome: 'Abril',
-        qtdEncomendas: 3
+        quantidade: 3
     },
     {
         nome: 'Maio',
-        qtdEncomendas: 4
+        quantidade: 4
     },
     {
         nome: 'Junho',
-        qtdEncomendas: 6
+        quantidade: 6
     },
     {
         nome: 'Julho',
-        qtdEncomendas: 15
+        quantidade: 15
     },
     {
         nome: 'Agosto',
-        qtdEncomendas: 9
+        quantidade: 9
     },
     {
         nome: 'Setembro',
-        qtdEncomendas: 5
+        quantidade: 5
     },
     {
         nome: 'Outubro',
-        qtdEncomendas: 18
+        quantidade: 18
     },
     {
         nome: 'Novembro',
-        qtdEncomendas: 20
+        quantidade: 20
     },
     {
         nome: 'Dezembro',
-        qtdEncomendas: 5
+        quantidade: 5
     },
-    
+
 ]

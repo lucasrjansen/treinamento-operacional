@@ -1,5 +1,5 @@
 <div>
-    <!--<app-page-header [heading]="'Home'"></app-page-header>-->
+    <!--<app-page-header [heading]="'Dashboard'"></app-page-header>
 
     Preciso fazer:
     Qtd Encomendas x Entregador
@@ -11,21 +11,87 @@
     -----
     pra cada gráfico, coloca uma opção pro usuário escolher se ele quer de barras ou de pizza
 
-    esse último pode deixar fixo um gráfico de linhas
+    esse último pode deixar fixo um gráfico de linhas-->
 
-    <div *ngIf="carregar" class="row">
-        <div class="col-10">
+    <div class="row justify-content-center">
+        <h2>Dashboard</h2>
 
-            <dashboard-line title="Encomendas por Entregador" [options]="dadosEncomendasPorMes"></dashboard-line>
+    </div>
+
+    <div *ngIf="carregar" class="dashboard">
+        <div class="row justify-content-center">
+            <div class="col-9">
+                <div class="row justify-content-center">
+                    <div class="col-10">
+                        <div class="card dashboard-line">
+                            <div class="card-body">
+                                <dashboard-line title="Encomendas por Entregador" [options]="dadosEncomendasPorMes">
+                                </dashboard-line>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row justify-content-center">
+                    <div class="col-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-11">
+                                        <div class="row justify-content-center">
+                                            <span>Encomendas por Entregador</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="row justify-content-end">
+                                            <a class="" (click)="trocarGrafico('encPorEntregador')">
+                                                <span id="encPorEntregador" class="material-icons"> pie_chart </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <dashboard-bars *ngIf="validarGrafico('bar_chart','encPorEntregador')"
+                                    [options]="dadosEncomendasPorEntregador">
+                                </dashboard-bars>
+
+                                <dashboard-pie *ngIf="validarGrafico('pie_chart','encPorEntregador')"
+                                    [options]="dadosEncomendasPorEntregador">
+                                </dashboard-pie>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-11">
+                                        <div class="row justify-content-center">
+                                            <span>Problemas por Entregador</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="row justify-content-end">
+                                            <a class="" (click)="trocarGrafico('probPorEntregador')">
+                                                <span id="probPorEntregador" class="material-icons"> pie_chart </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <dashboard-bars *ngIf="validarGrafico('bar_chart','probPorEntregador')"
+                                    [options]="dadosEncomendasPorEntregador">
+                                </dashboard-bars>
+
+                                <dashboard-pie *ngIf="validarGrafico('pie_chart','probPorEntregador')"
+                                    [options]="dadosEncomendasPorEntregador">
+                                </dashboard-pie>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-5">
-            <dashboard-bars title="Encomendas por Entregador" [options]="dadosEncomendasPorEntregador"></dashboard-bars>
-        </div>
-        <div class="col-5">
-
-            <dashboard-pie title="Encomendas por Entregador" [options]="dadosEncomendasPorEntregador"></dashboard-pie>
-        </div>
-
     </div>
 
 </div>

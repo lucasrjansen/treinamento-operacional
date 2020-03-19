@@ -1,8 +1,8 @@
 import { DashboardInfo } from './DashboardInfo';
 
-export interface DashboardData{
+export interface DashboardOptions{
 
     infos: DashboardInfo[];
     valueId: string;
-    dataList: any[];
+    dataSource: any[];
 }

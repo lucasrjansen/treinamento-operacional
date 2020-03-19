@@ -1,0 +1,36 @@
+<div class="pies-container">
+    <dx-pie-chart 
+        class="pie"
+        [title]="title"
+        [palette]="'Material'"
+        [dataSource]="options.dataSource"
+        sizeGroup="piesGroup">
+        
+        <dxi-series 
+            *ngFor="let info of options.infos"
+            [argumentField]="options.valueId"
+            [valueField]="info.valueName">
+
+            <dxo-label
+                [visible]="true"
+                position="columns"
+                [format]="{
+                    type: 'fixedPoint',
+                    precision: '0'
+                }">
+                <dxo-font [size]="16"></dxo-font>
+                <dxo-connector
+                    [visible]="true"
+                    [width]="0.5">
+                </dxo-connector>
+            </dxo-label>
+        </dxi-series>
+        
+        <dxo-legend 
+            verticalAlignment="bottom"
+            horizontalAlignment="center"
+            itemTextPosition="right"
+            [rowCount]="2">
+        </dxo-legend>
+    </dx-pie-chart>
+</div>

@@ -1,0 +1,35 @@
+<div class="pies-container">
+    <dx-chart
+        [title]="title"
+        palette="Violet"
+        [dataSource]="options.dataSource">
+
+        <dxi-series
+            *ngFor="let info of options.infos"
+            [valueField]="info.valueName"
+            [name]="info.description">
+        </dxi-series>
+
+        <dxo-common-series-settings #seriesSettings
+            [argumentField]="options.valueId"
+            [type]="'line'">
+        </dxo-common-series-settings>
+
+        <dxo-margin [bottom]="20"></dxo-margin>
+
+        <dxo-argument-axis
+            [valueMarginsEnabled]="false"
+            discreteAxisDivisionMode="crossLabels">
+
+            <dxo-grid [visible]="true"></dxo-grid>
+        </dxo-argument-axis>
+
+        <dxo-legend
+            verticalAlignment="bottom"
+            horizontalAlignment="center"
+            itemTextPosition="bottom">
+        </dxo-legend>
+        
+        <dxo-tooltip [enabled]="true"></dxo-tooltip>
+    </dx-chart>
+</div>

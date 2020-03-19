@@ -1,23 +1,29 @@
-<div>
-    <dx-chart id="chart"
-        title="{{tittle}}" 
-        [dataSource]="dashboardData.dataList" 
+<div class="bars">
+    <dx-chart
+        [title]="title" 
+        [dataSource]="options.dataSource" 
         [barGroupPadding]="0.2">
 
-        <dxi-series *ngFor="let info of dashboardData.infos" valueField="{{info.valueName}}"
-            name="{{info.description}}">
+        <dxi-series
+            *ngFor="let info of options.infos"
+            [valueField]="info.valueName"
+            [name]="info.description">
         </dxi-series>
-
-        <dxo-common-series-settings argumentField="{{dashboardData.valueId}}" 
+        
+        <dxo-common-series-settings 
+            [argumentField]="options.valueId" 
             type="bar"
             hoverMode="allArgumentPoints" 
             selectionMode="allArgumentPoints" 
             [barPadding]="0.1">
 
-            <dxo-label [visible]="true" [format]="{
-                type: 'fixedPoint',
-                precision: '0'
-            }"></dxo-label>
+            <dxo-label 
+                [visible]="true" 
+                [format]="{
+                    type: 'fixedPoint',
+                    precision: '0'
+                }">
+            </dxo-label>
         </dxo-common-series-settings>
     </dx-chart>
 </div>

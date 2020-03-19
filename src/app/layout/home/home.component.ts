@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardData, DashboardInfo, EncomendasEntregador } from 'src/app/shared/_models/';
+import { DashboardInfo, EncomendasEntregador, DashboardOptions } from 'src/app/shared/_models/';
 import { DashboardService } from 'src/app/shared/_services';
 
 @Component({
@@ -9,13 +9,12 @@ import { DashboardService } from 'src/app/shared/_services';
 })
 export class HomeComponent implements OnInit {
 
-    encomendasEntregador: EncomendasEntregador[]
-    dadosEncomendasPorEntregador: DashboardData;
+    encomendasEntregador: EncomendasEntregador[];
+    dadosEncomendasPorMes: DashboardOptions;
+    dadosEncomendasPorEntregador: DashboardOptions;
     carregar = false;
-    
-    constructor(
-        private dashboardService: DashboardService
-    ) {}
+
+    constructor(private dashboardService: DashboardService) { }
 
     ngOnInit() {
         this.buscarEncomendasPorEntregador();
@@ -24,23 +23,26 @@ export class HomeComponent implements OnInit {
     async buscarEncomendasPorEntregador() {
         await this.dashboardService.encomendasPorEntregador().toPromise().then(ret => {
             this.encomendasEntregador = ret;
-            console.log(ret);
-            console.log('teste');
             this.carregar = true;
+
         })
         this.montarDashboardData();
     }
 
     montarDashboardData() {
-        console.log('inicio montarDashboardData');
-
-        console.log(this.encomendasEntregador);
 
         this.dadosEncomendasPorEntregador = {
             infos: this.montarDashboardInfo(),
             valueId: 'nome',
-            dataList: this.encomendasEntregador
+            dataSource: this.encomendasEntregador
         }
+
+        this.dadosEncomendasPorMes = {
+            infos: this.montarDashboardInfo(),
+            valueId: 'nome',
+            dataSource: encomendasPorMes
+        }
+
         console.log('montarDashboardDados');
         console.log(this.dadosEncomendasPorEntregador);
     }
@@ -58,30 +60,55 @@ export class HomeComponent implements OnInit {
     }
 }
 
-export class GrossProduct {
-    state: string;
-    year2004: number;
-    year2001: number;
-}
 
-let grossProductData: GrossProduct[] = [{
-    state: "LUCAS",
-    year2004: 4,
-    year2001: 17
-}, {
-    state: "JOAO",
-    year2004: 8,
-    year2001: 10
-}, {
-    state: "IVENS",
-    year2004: 21,
-    year2001: 1
-}, {
-    state: "GABRIEL",
-    year2004: 1,
-    year2001: 3
-}, {
-    state: "PLABO",
-    year2004: 17,
-    year2001: 4
-}];
+export const encomendasPorMes = [
+    {
+        nome: 'Janeiro',
+        qtdEncomendas: 17
+    },
+    {
+        nome: 'Fevereiro',
+        qtdEncomendas: 12
+    },
+    {
+        nome: 'Março',
+        qtdEncomendas: 4
+    },
+    {
+        nome: 'Abril',
+        qtdEncomendas: 3
+    },
+    {
+        nome: 'Maio',
+        qtdEncomendas: 4
+    },
+    {
+        nome: 'Junho',
+        qtdEncomendas: 6
+    },
+    {
+        nome: 'Julho',
+        qtdEncomendas: 15
+    },
+    {
+        nome: 'Agosto',
+        qtdEncomendas: 9
+    },
+    {
+        nome: 'Setembro',
+        qtdEncomendas: 5
+    },
+    {
+        nome: 'Outubro',
+        qtdEncomendas: 18
+    },
+    {
+        nome: 'Novembro',
+        qtdEncomendas: 20
+    },
+    {
+        nome: 'Dezembro',
+        qtdEncomendas: 5
+    },
+    
+]

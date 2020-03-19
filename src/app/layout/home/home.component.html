@@ -13,10 +13,19 @@
 
     esse último pode deixar fixo um gráfico de linhas
 
-    <div class="row">
-        <div *ngIf="carregar" class="col-10">
-            <dashboard-bars tittle="Encomendas por Entregador" [dashboardData]="dadosEncomendasPorEntregador"></dashboard-bars>
+    <div *ngIf="carregar" class="row">
+        <div class="col-10">
+
+            <dashboard-line title="Encomendas por Entregador" [options]="dadosEncomendasPorMes"></dashboard-line>
         </div>
+        <div class="col-5">
+            <dashboard-bars title="Encomendas por Entregador" [options]="dadosEncomendasPorEntregador"></dashboard-bars>
+        </div>
+        <div class="col-5">
+
+            <dashboard-pie title="Encomendas por Entregador" [options]="dadosEncomendasPorEntregador"></dashboard-pie>
+        </div>
+
     </div>
 
 </div>

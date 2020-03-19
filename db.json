@@ -82,19 +82,19 @@
   "encomendasPorEntregador": [
     {
       "nome": "Lucas Janzen",
-      "qtdEncomendas": 4
+      "quantidade": 4
     },
     {
       "nome": "Gabriel Raimondi",
-      "qtdEncomendas": 7
+      "quantidade": 7
     },
     {
       "nome": "Ivens Muller",
-      "qtdEncomendas": 13
+      "quantidade": 13
     },
     {
       "nome": "Plabo Depine",
-      "qtdEncomendas": 8
+      "quantidade": 8
     }
   ]
 }

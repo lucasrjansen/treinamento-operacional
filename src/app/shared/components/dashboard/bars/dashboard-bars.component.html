@@ -1,9 +1,9 @@
-<div class="bars">
+<div class="">
     <dx-chart
         [title]="title" 
         [dataSource]="options.dataSource" 
         [barGroupPadding]="0.2">
-
+    
         <dxi-series
             *ngFor="let info of options.infos"
             [valueField]="info.valueName"
@@ -25,5 +25,11 @@
                 }">
             </dxo-label>
         </dxo-common-series-settings>
+
+        <dxo-legend
+            verticalAlignment="bottom"
+            horizontalAlignment="center"
+            itemTextPosition="bottom">
+        </dxo-legend>
     </dx-chart>
 </div>

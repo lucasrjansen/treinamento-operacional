@@ -8,7 +8,6 @@ import { HeaderComponent } from './header/header.component';
 import {
     EntregadorService, EncomendaService, DestinatarioService, ProblemaService
 } from '../shared/_services/';
-import { ToastService } from 'angular-toastify';
 
 @NgModule({
     imports: [

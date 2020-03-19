@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { SessionStorageService, DestinatarioService } from 'src/app/shared/_services';
 import { Destinatario } from 'src/app/shared/_models';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
     selector: 'app-destinatarios-adicionar',
@@ -20,7 +21,8 @@ export class DestinatariosAdicionarComponent implements OnInit, OnDestroy {
         private router: Router,
         private formBuilder: FormBuilder,
         private sessionStorageService: SessionStorageService,
-        private destinatarioService: DestinatarioService
+        private destinatarioService: DestinatarioService,
+        private notifier: NotifierService
     ) { }
 
     ngOnInit() {
@@ -64,14 +66,19 @@ export class DestinatariosAdicionarComponent implements OnInit, OnDestroy {
         this.destinatarioService.adicionar(this.montarDestinatario()).subscribe(ret => {
             retorno = ret;
 
-        }, err => { },
-            () => {
-                if (retorno) {
+        }, err => {
+            console.log(err);
+            this.notifier.notify('error',
+                this.destinatario ? `Destinatário não editado, tente novamente.` : `Destinatário não cadastrado, tente novamente.`);
 
-                    alert(this.destinatario ? `Destinatário editado com Sucesso!` : `Destinatário cadastrado com Sucesso!`)
-                    this.router.navigate(['/destinatarios']);
-                }
-            });
+        }, () => {
+            if (retorno) {
+
+                this.notifier.notify('success',
+                    this.destinatario ? `Destinatário editado com Sucesso!` : `Destinatário cadastrado com Sucesso!`);
+                this.router.navigate(['/destinatarios']);
+            }
+        });
     }
 
     montarDestinatario(): Destinatario {

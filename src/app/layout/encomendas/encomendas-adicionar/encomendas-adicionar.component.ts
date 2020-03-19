@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 
 import { SessionStorageService, DestinatarioService, EncomendaService, EntregadorService } from 'src/app/shared/_services';
 import { Encomenda, Destinatario, Entregador } from 'src/app/shared/_models';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
     selector: 'app-encomendas-adicionar',
@@ -28,7 +29,8 @@ export class EncomendasAdicionarComponent implements OnInit, OnDestroy {
         private sessionStorageService: SessionStorageService,
         private encomendaService: EncomendaService,
         private destinatarioService: DestinatarioService,
-        private entregadorService: EntregadorService
+        private entregadorService: EntregadorService,
+        private notifier: NotifierService
     ) { }
 
     ngOnInit() {
@@ -56,8 +58,6 @@ export class EncomendasAdicionarComponent implements OnInit, OnDestroy {
                 produto: [null, Validators.compose([Validators.required])],
             });
         }
-        console.log(this.encomenda);
-
 
         this.selDestinatario = new FormControl(this.encomenda != null ? this.encomenda.destinatario.id : 0);
         this.selEntregador = new FormControl(this.encomenda != null ? this.encomenda.entregador.id : 0);
@@ -66,15 +66,12 @@ export class EncomendasAdicionarComponent implements OnInit, OnDestroy {
     buscarDestinatarios() {
         this.destinatarioService.buscarTodos().subscribe(ret => {
             this.listaDestinatarios = ret;
-            console.log(ret);
-
         });
     }
 
     buscarEntregadores() {
         this.entregadorService.buscarTodos().subscribe(ret => {
             this.listaEntregadores = ret;
-            console.log(ret);
         });
     }
 
@@ -84,14 +81,19 @@ export class EncomendasAdicionarComponent implements OnInit, OnDestroy {
         this.encomendaService.adicionar(this.montarEncomenda()).subscribe(ret => {
             retorno = ret;
 
-        }, err => { },
-            () => {
-                if (retorno) {
+        }, err => {
+            console.log(err);
+            this.notifier.notify('error',
+                this.encomenda ? `Encomenda não alterada, tente novamente.` : `Encomenda não cadastrada, tente novamente.`);
 
-                    alert(this.encomenda ? `Encomenda editado com Sucesso!` : `Encomenda cadastrado com Sucesso!`)
-                    this.router.navigate(['/encomendas']);
-                }
-            });
+        }, () => {
+            if (retorno) {
+
+                this.notifier.notify('success',
+                    this.encomenda ? `Encomenda editado com Sucesso!` : `Encomenda cadastrado com Sucesso!`);
+                this.router.navigate(['/encomendas']);
+            }
+        });
     }
 
     montarEncomenda(): Encomenda {

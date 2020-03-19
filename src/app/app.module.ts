@@ -8,6 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AuthenticationService, SessionStorageService } from './shared/_services';
+import { NotifierModule } from 'angular-notifier';
+import { confNotifier } from 'src/app/shared/config/Conf-Notifier';
 
 @NgModule({
   imports: [
@@ -17,6 +19,7 @@ import { AuthenticationService, SessionStorageService } from './shared/_services
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
+    NotifierModule.withConfig(confNotifier)
   ],
   declarations: [
     AppComponent,

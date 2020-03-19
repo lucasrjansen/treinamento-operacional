@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Entregador } from 'src/app/shared/_models';
 import { configurarPaginador } from 'src/app/shared/utils';
-import { ToastService } from 'angular-toastify';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-entregadores',
@@ -23,7 +23,7 @@ export class EntregadoresComponent implements OnInit {
     private router: Router,
     private sessionStorageService: SessionStorageService,
     private entregadorService: EntregadorService,
-    private _toastService: ToastService
+    private notifier: NotifierService
   ) { }
 
   ngOnInit(): void {
@@ -41,10 +41,6 @@ export class EntregadoresComponent implements OnInit {
   editar(entregador: Entregador) {
     this.sessionStorageService.setValue('editEntregador', entregador)
   }
-  
-  alerta() {
-    this._toastService.info('message');
-  }
 
   excluir(entregador: Entregador) {
 
@@ -52,15 +48,17 @@ export class EntregadoresComponent implements OnInit {
     this.entregadorService.deletar(entregador.id).subscribe(ret => {
       retorno = ret;
 
-    }, err => { },
-      () => {
-        if (retorno) {
+    }, err => {
+      console.log(err);
+      this.notifier.notify('error', 'Entregador não excluído, tente novamente.');
 
-          this._toastService.info('message');
-          // alert(`Entregador excluído com Sucesso!`)
-          //location.reload();
-        }
-      })
+    }, () => {
+      if (retorno) {
+
+        this.notifier.notify('error', 'Entregador excluído com Sucesso!');
+        //location.reload();
+      }
+    })
   }
 
   aplicarFiltro(valor: string) {

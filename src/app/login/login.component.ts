@@ -3,6 +3,7 @@ import { Credenciais, Entregador } from '../shared/_models';
 import { AuthenticationService, SessionStorageService } from '../shared/_services/';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuild: FormBuilder,
     private authenticador: AuthenticationService,
-    private sessionStorage: SessionStorageService
+    private sessionStorage: SessionStorageService,
+    private notifier: NotifierService
   ) { }
 
   ngOnInit(): void {
@@ -44,20 +46,25 @@ export class LoginComponent implements OnInit {
     let retorno: Entregador[];
     this.authenticador.autenticar(this.credenciais).subscribe(ret => {
       retorno = ret;
-      
-    }, err => { },
+
+    }, err => {
+      console.log(err);
+      this.notifier.notify("error", "Usuário Inválido");
+
+    },
       () => {
         console.log(retorno);
-        
+
         retorno.forEach(ret => {
-          console.log(ret);
-          console.log(this.loginForm.value.email);
-          console.log(ret.email);
-          
+
           if (ret.email == this.loginForm.value.email && ret.senha == this.loginForm.value.senha) {
-            
+
             this.router.navigate(['/home']);
-            this.sessionStorage.setValue('localUser',ret);
+            this.sessionStorage.setValue('localUser', ret);
+
+          } else {
+            this.notifier.notify("error", "Usuário Inválido");
+
           }
         })
       });

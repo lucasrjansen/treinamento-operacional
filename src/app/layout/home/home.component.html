@@ -34,7 +34,7 @@
                 <br />
                 <div class="row justify-content-center">
                     <div class="col-5">
-                        <div class="card">
+                        <div class="card dashboard-bars">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-11">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="col-5">
-                        <div class="card">
+                        <div class="card dashboard-bars">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-11">
@@ -80,11 +80,101 @@
                                 </div>
 
                                 <dashboard-bars *ngIf="validarGrafico('bar_chart','probPorEntregador')"
-                                    [options]="dadosEncomendasPorEntregador">
+                                    [options]="dadosProblemasPorEntregador">
                                 </dashboard-bars>
 
                                 <dashboard-pie *ngIf="validarGrafico('pie_chart','probPorEntregador')"
-                                    [options]="dadosEncomendasPorEntregador">
+                                    [options]="dadosProblemasPorEntregador">
+                                </dashboard-pie>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row justify-content-center">
+                    <div class="col-5">
+                        <div class="card dashboard-bars">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-11">
+                                        <div class="row justify-content-center">
+                                            <span>Encomendas por Estado</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="row justify-content-end">
+                                            <a class="" (click)="trocarGrafico('encPorEstado')">
+                                                <span id="encPorEstado" class="material-icons"> pie_chart </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <dashboard-bars *ngIf="validarGrafico('bar_chart','encPorEstado')"
+                                    [options]="dadosEncomendasPorEstado">
+                                </dashboard-bars>
+
+                                <dashboard-pie *ngIf="validarGrafico('pie_chart','encPorEstado')"
+                                    [options]="dadosEncomendasPorEstado">
+                                </dashboard-pie>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="card dashboard-bars">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-11">
+                                        <div class="row justify-content-center">
+                                            <span>Encomendas por Cidade</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="row justify-content-end">
+                                            <a class="" (click)="trocarGrafico('encPorCidade')">
+                                                <span id="encPorCidade" class="material-icons"> pie_chart </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <dashboard-bars *ngIf="validarGrafico('bar_chart','encPorCidade')"
+                                    [options]="dadosEncomendasPorCidade">
+                                </dashboard-bars>
+
+                                <dashboard-pie *ngIf="validarGrafico('pie_chart','encPorCidade')"
+                                    [options]="dadosEncomendasPorCidade">
+                                </dashboard-pie>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row justify-content-center">
+                    <div class="col-5">
+                        <div class="card dashboard-bars">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-11">
+                                        <div class="row justify-content-center">
+                                            <span>Encomendas por Cliente</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="row justify-content-end">
+                                            <a class="" (click)="trocarGrafico('encPorCliente')">
+                                                <span id="encPorCliente" class="material-icons"> pie_chart </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <dashboard-bars *ngIf="validarGrafico('bar_chart','encPorCliente')"
+                                    [options]="dadosEncomendasPorCliente">
+                                </dashboard-bars>
+
+                                <dashboard-pie *ngIf="validarGrafico('pie_chart','encPorCliente')"
+                                    [options]="dadosEncomendasPorCliente">
                                 </dashboard-pie>
                             </div>
                         </div>
@@ -93,5 +183,4 @@
             </div>
         </div>
     </div>
-
 </div>

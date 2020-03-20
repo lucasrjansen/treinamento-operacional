@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SessionStorageService, DestinatarioService } from 'src/app/shared/_services';
 import { Router } from '@angular/router';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { configurarPaginador } from 'src/app/shared/utils';
 import { Destinatario } from 'src/app/shared/_models';
 import { NotifierService } from 'angular-notifier';
+import { DxDataGridComponent } from 'devextreme-angular';
 
 @Component({
   selector: 'app-destinatarios',
@@ -13,11 +12,8 @@ import { NotifierService } from 'angular-notifier';
 })
 export class DestinatariosComponent implements OnInit {
 
-  colunas: string[] = ['id', 'nome', 'endereco', 'acoes'];
-  destinatarios = new MatTableDataSource<Destinatario>();
-
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(DxDataGridComponent, { static: false }) dataGrid: DxDataGridComponent;
+  destinatarios: Destinatario[];
 
   constructor(
     private router: Router,
@@ -31,17 +27,25 @@ export class DestinatariosComponent implements OnInit {
     this.buscarDestinatarios();
   }
 
-
   buscarDestinatarios() {
     this.destinatarioService.buscarTodos().subscribe(ret => {
-      this.destinatarios.data = ret;
-    });
+      this.destinatarios = ret;
+
+    }, err => { },
+      () => {
+        this.dataGrid.dataSource = this.destinatarios;
+      }
+    );
+  }
+
+  montaEndereco(endereco): string{    
+    return `Rua ${endereco.rua}, ${endereco.numero}, ${endereco.cidade} - ${endereco.estado}`;
   }
 
   editar(destinatario: Destinatario) {
-    this.sessionStorageService.setValue('editDestinatario', destinatario)
+    this.sessionStorageService.setValue('editDestinatario', destinatario);
+    this.router.navigate(['/destinatarios-adicionar']);
   }
-
 
   excluir(destinatario: Destinatario) {
 
@@ -57,20 +61,9 @@ export class DestinatariosComponent implements OnInit {
       if (retorno) {
 
         this.notifier.notify('success', 'Destinatário excluído com Sucesso!');
-        //location.reload();
+        this.dataGrid.instance.refresh();
       }
     });
-  }
-
-  aplicarFiltro(valor: string) {
-    this.destinatarios.filter = valor.trim().toLowerCase();
-  }
-
-  configurarPaginador() {
-    this.paginator = configurarPaginador(this.paginator);
-
-    this.destinatarios.paginator = this.paginator;
-    this.destinatarios.sort = this.sort;
   }
 
 }

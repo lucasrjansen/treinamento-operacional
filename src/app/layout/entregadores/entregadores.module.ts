@@ -5,10 +5,9 @@ import { CommonModule } from '@angular/common';
 import { PageHeaderModule } from 'src/app/shared/components/page-header/page-header.module';
 import { EntregadoresComponent } from './entregadores.component';
 import { EntregadoresRoutingModule } from './entregadores-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatTableModule, MatPaginatorModule, MatSortModule} from '@angular/material/';
 import { BtnCadastrarModule, BtnEditarModule, BtnExcluirModule, BtnVisualizarModule} from 'src/app/shared/components/buttons/';
+import { DxTemplateModule, DxDataGridModule } from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -23,12 +22,9 @@ import { BtnCadastrarModule, BtnEditarModule, BtnExcluirModule, BtnVisualizarMod
     BtnEditarModule,
     BtnExcluirModule,
     BtnVisualizarModule,
-    MatTableModule,
-    MatPaginatorModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSortModule,
-    NgbModule
+    NgbModule,
+    DxDataGridModule,
+    DxTemplateModule
   ],
   schemas: [
       CUSTOM_ELEMENTS_SCHEMA

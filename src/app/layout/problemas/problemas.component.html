@@ -1,52 +1,71 @@
 <div>
-    <app-page-header [heading]="'Problemas na entrega'"></app-page-header>
+    
+
+    <div class="row justify-content-center">
+        <div class="col-9">
+
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <app-page-header [heading]="'Problemas na entrega'"></app-page-header>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row justify-content-center table-content">
-        <!-- Table -->
-        <div class="col-12 col-sm-12 col-md-12 col-lg-11 col-xl-8">
-            <table mat-table [dataSource]="problemas" matSort class="mat-elevation-z4">
-                <!-- ID -->
-                <ng-container matColumnDef="encomenda">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Encomenda </th>
-                    <td mat-cell *matCellDef="let problema"> #{{problema.encomenda.id}} </td>
-                </ng-container>
+        
+        <div class="col-8">
+            <dx-data-grid 
+                id="gridContainer" 
+                [dataSource]="problemas" 
+                [allowColumnReordering]="true"
+                [showBorders]="true"
+                [rowAlternationEnabled]="true">
 
-                <!-- Nome -->
-                <ng-container matColumnDef="problema">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Problema </th>
-                    <td mat-cell *matCellDef="let problema"> {{problema.descricao}} </td>
-                </ng-container>
+                <dxi-column
+                    caption="Encomenda" 
+                    dataField="encomenda.id"
+                    [width]="160"
+                ></dxi-column>
+                <dxi-column caption="Problema"  dataField="descricao" [width]="760" ></dxi-column>
+                <dxi-column 
+                    caption="Ações" 
+                    dataField="problemas" 
+                    [width]="120" 
+                    [allowFiltering]="false"
+                    [allowSorting]="false" 
+                    cellTemplate="cellAcoes"
+                ></dxi-column>
 
-                <!-- acoes -->
-                <ng-container matColumnDef="acoes">
-                    <th mat-header-cell *matHeaderCellDef> Ações</th>
-                    <td mat-cell *matCellDef="let problema">
+                <div *dxTemplate="let data of 'cellAcoes'">
+                    <btn-visualizar 
+                        (click)="visualizar(data.row.data)"
+                        title="Visualizar"
+                    ></btn-visualizar>
+                     <a (click)="cancelarEncomenda(data)">
+                        <i class="material-icons icon icon-excluir"> delete_forever </i>
+                    </a>
+                </div>
 
-                        <div ngbDropdown class="d-inline-block">
-                            <a class="btn-acoes" id="dropdown" ngbDropdownToggle>
-                                <i class="material-icons more_horiz"> more_horiz </i>
-                            </a>
-                            <div ngbDropdownMenu aria-labelledby="dropdown">
+                <dxo-editing mode="row" [allowDeleting]="false">
+                    <dxo-texts 
+                        confirmDeleteMessage="Deseja realmente excluir este registro?"
+                    ></dxo-texts>
+                </dxo-editing>
+                
+                <dxo-search-panel 
+                    [visible]="true" 
+                    [width]="240" 
+                    placeholder="Buscar por problema"
+                ></dxo-search-panel>
 
-                                <btn-visualizar ngbDropdownItem (click)="visualizar(problema)">
-                                </btn-visualizar>                                
-
-                                <a ngbDropdownItem (click)="cancelarEncomenda(problema)">
-                                    <i class="material-icons icon icon-excluir"> delete_forever </i>
-                                    Cancelar Encomenda
-                                </a>
-                            </div>
-                        </div>
-                    </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="colunas"></tr>
-                <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
-            </table>
-            <div>
-                <!-- Pagination
-                <mat-paginator></mat-paginator> -->
-            </div>
+                <dxo-paging [pageSize]="10"></dxo-paging>
+                <dxo-pager  
+                    [visible]="true"
+                    [showPageSizeSelector]="true"
+                    [allowedPageSizes]="[10, 25, 50, 100]"
+                ></dxo-pager>
+            </dx-data-grid>
         </div>
     </div>
 </div>

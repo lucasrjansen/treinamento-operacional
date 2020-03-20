@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SessionStorageService, EntregadorService, ProblemaService, EncomendaService } from 'src/app/shared/_services';
-import { Router } from '@angular/router';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { Entregador, Problema, Encomenda } from 'src/app/shared/_models';
-import { configurarPaginador } from 'src/app/shared/utils';
+import { ProblemaService, EncomendaService } from 'src/app/shared/_services';
+import { Problema, Encomenda } from 'src/app/shared/_models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VisualizarProblemaComponent } from './visualizar-problema/visualizar-problema.component';
 import { NotifierService } from 'angular-notifier';
+import { DxDataGridComponent } from 'devextreme-angular';
 
 @Component({
   selector: 'app-problemas',
@@ -15,11 +13,8 @@ import { NotifierService } from 'angular-notifier';
 })
 export class ProblemasComponent implements OnInit {
 
-  colunas: string[] = ['encomenda', 'problema', 'acoes'];
-  problemas = new MatTableDataSource<Problema>();
-
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(DxDataGridComponent, { static: false }) dataGrid: DxDataGridComponent;
+  problemas: Problema[];
 
   constructor(
     private modalService: NgbModal,
@@ -35,8 +30,12 @@ export class ProblemasComponent implements OnInit {
 
   buscarProblemas() {
     this.problemaService.buscarTodos().subscribe(ret => {
-      this.problemas.data = ret;
-    });
+      this.problemas = ret;
+    }, err => { },
+      () => {
+        this.dataGrid.dataSource = this.problemas;
+      }
+    );
   }
 
   visualizar(problema: Problema) {
@@ -58,8 +57,8 @@ export class ProblemasComponent implements OnInit {
     }, () => {
 
       if (retorno) {
+
         this.notifier.notify('success', 'Encomenda Cancelada com Sucesso!');
-        //location.reload();
       }
     });
   }
@@ -75,13 +74,6 @@ export class ProblemasComponent implements OnInit {
       dtEntrega: new Date(),
       dtRetirada: new Date()
     }
-  }
-
-  configurarPaginador() {
-    this.paginator = configurarPaginador(this.paginator);
-
-    this.problemas.paginator = this.paginator;
-    this.problemas.sort = this.sort;
   }
 
 }

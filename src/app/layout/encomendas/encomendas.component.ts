@@ -7,6 +7,7 @@ import { configurarPaginador } from 'src/app/shared/utils';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VisualizarEncomendaComponent } from './visualizar-encomenda/visualizar-encomenda.component';
 import { NotifierService } from 'angular-notifier';
+import { EventDataGrid } from 'src/app/shared/_models/EventDataGrid';
 
 @Component({
   selector: 'app-encomendas',
@@ -17,6 +18,8 @@ export class EncomendasComponent implements OnInit {
 
   colunas: string[] = ['id', 'destinatario', 'entregador', 'cidade', 'estado', 'status', 'acoes'];
   encomendas = new MatTableDataSource<Encomenda>();
+
+  encomendasGrid: Encomenda[];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -35,7 +38,8 @@ export class EncomendasComponent implements OnInit {
 
   buscarDestinatarios() {
     this.encomendaService.buscarTodos().subscribe(ret => {
-      this.encomendas.data = ret;
+      //this.encomendas.data = ret;
+      this.encomendasGrid = ret;
     });
   }
 
@@ -46,7 +50,8 @@ export class EncomendasComponent implements OnInit {
   }
 
   editar(encomenda: Encomenda) {
-    this.sessionStorageService.setValue('editEncomenda', encomenda)
+    this.sessionStorageService.setValue('editEncomenda', encomenda);
+    this.router.navigate(['/encomendas-adicionar']);
   }
 
   excluir(encomenda: Encomenda) {
@@ -64,7 +69,7 @@ export class EncomendasComponent implements OnInit {
         if (retorno) {
 
           this.notifier.notify('success', 'Encomenda excluída com Sucesso!');
-           //location.reload();
+          //location.reload();
         }
       })
   }

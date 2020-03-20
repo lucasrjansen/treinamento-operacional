@@ -1,98 +1,74 @@
 <div>
-    <app-page-header [heading]="'Gerenciando encomendas'"></app-page-header>
-
+    
     <div class="row justify-content-center">
+        <div class="col-9">
 
-        <div class="col-7 col-sm-9 col-md-6 col-lg-5 col-xl-3">
-            <input class="form-control" matInput (keyup)="aplicarFiltro($event.target.value)"
-                placeholder="Buscar por encomendas">
-        </div>
-        <div class="col-4 col-sm-2 col-md-5 col-lg-6 col-xl-5">
-            <div class="row justify-content-end">
-                <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-3">
-                    <btn-cadastrar [routerLink]="['/encomendas-adicionar']" [routerLinkActive]="['router-link-active']">
-                    </btn-cadastrar>
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <app-page-header [heading]="'Gerenciando encomendas'"></app-page-header>
+                </div>
+                <div class="col-2">
+                    <div class="row justify-content-end">
+                        <btn-cadastrar [routerLink]="['/encomendas-adicionar']" [routerLinkActive]="['router-link-active']">
+                        </btn-cadastrar>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 
     <div class="row justify-content-center table-content">
-        <!-- Table -->
-        <div class="col-12 col-sm-12 col-md-12 col-lg-11 col-xl-8">
-            <table mat-table [dataSource]="encomendas" matSort class="mat-elevation-z4">
-                <!-- ID -->
-                <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-                    <td mat-cell *matCellDef="let encomenda"> {{encomenda.id}} </td>
-                </ng-container>
 
-                <!-- Destinatário -->
-                <ng-container matColumnDef="destinatario">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Destinatário </th>
-                    <td mat-cell *matCellDef="let encomenda"> {{encomenda.destinatario.nome}} </td>
-                </ng-container>
+        <div class="col-8">
+            <dx-data-grid 
+                id="gridContainer" 
+                [dataSource]="encomendasGrid" 
+                [allowColumnReordering]="true"
+                [showBorders]="true"
+                [rowAlternationEnabled]="true">
 
-                <!-- Entregador -->
-                <ng-container matColumnDef="entregador">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Entregador </th>
-                    <td mat-cell *matCellDef="let encomenda"> {{encomenda.entregador.nome}} </td>
-                </ng-container>
+                <dxi-column caption="Destinatário" dataField="destinatario.nome" [groupIndex]="0"></dxi-column>
+                <dxi-column [allowFiltering]="false" caption="ID" dataField="id"></dxi-column>
+                <dxi-column [allowFiltering]="false" caption="Entregador" dataField="entregador.nome"></dxi-column>
+                <dxi-column [allowFiltering]="false" caption="Cidade" dataField="destinatario.cidade"></dxi-column>
+                <dxi-column [allowFiltering]="false" caption="Estado" dataField="destinatario.estado"></dxi-column>
+                <dxi-column caption="Status" dataField="status" [width]="100"></dxi-column>
+                
+                <dxi-column 
+                    caption="Ações" 
+                    dataField="encomendasGrid" 
+                    [width]="115" 
+                    [allowFiltering]="false"
+                    [allowSorting]="false" 
+                    cellTemplate="cellTemplate"
+                ></dxi-column>
 
-                <!-- Cidade -->
-                <ng-container matColumnDef="cidade">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Cidade </th>
-                    <td mat-cell *matCellDef="let encomenda"> {{encomenda.destinatario.cidade}} </td>
-                </ng-container>
+                <div *dxTemplate="let data of 'cellTemplate'">
+                    <btn-visualizar (click)="modalInformacoes(data.row.data)" title="Visualizar"></btn-visualizar>
+                    <btn-editar (click)="editar(data.row.data)" title="Editar"></btn-editar>
+                    <btn-excluir (click)="excluir(data.row.data)" title="Excluir"></btn-excluir>
+                    <btn-report-problem (click)="adicionarProblema(data.row.data)" title="Novo Problema"></btn-report-problem>
+                </div>
 
-                <!-- Estados -->
-                <ng-container matColumnDef="estado">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
-                    <td mat-cell *matCellDef="let encomenda"> {{encomenda.destinatario.estado}} </td>
-                </ng-container>
-
-                <!-- Status -->
-                <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-                    <td mat-cell *matCellDef="let encomenda">
-                        {{encomenda.status}}
-                    </td>
-                </ng-container>
-
-                <!-- Ações -->
-                <ng-container matColumnDef="acoes">
-                    <th mat-header-cell *matHeaderCellDef> Ações </th>
-                    <td mat-cell *matCellDef="let encomenda">
-
-
-                        <div ngbDropdown class="d-inline-block">
-                            <a class="btn-acoes" id="dropdown" ngbDropdownToggle>
-                                <i class="material-icons more_horiz"> more_horiz </i>
-                            </a>
-                            <div ngbDropdownMenu aria-labelledby="dropdown">
-
-                                <btn-visualizar ngbDropdownItem (click)="modalInformacoes(encomenda)"> </btn-visualizar>
-
-                                <btn-editar ngbDropdownItem [routerLink]="['/encomendas-adicionar']"
-                                    [routerLinkActive]="['router-link-active']" (click)="editar(encomenda)">
-                                </btn-editar>
-
-                                <btn-excluir ngbDropdownItem (click)="excluir(encomenda)"></btn-excluir>
-
-                                <a ngbDropdownItem (click)="adicionarProblema(encomenda)">
-                                    <i class="material-icons icon icon-excluir"> delete_forever </i>
-                                    Novo Problema
-                                </a>
-
-                            </div>
-                        </div>
-
-                    </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="colunas"></tr>
-                <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
-            </table>
+                <dxo-header-filter 
+                    [visible]="true"
+                    [allowSearch]="true"
+                ></dxo-header-filter>
+                <dxo-search-panel 
+                    [visible]="true" 
+                    [width]="240" 
+                    placeholder="Buscar por encomenda"
+                ></dxo-search-panel>
+                <dxo-paging [pageSize]="10"></dxo-paging>
+                <dxo-pager  
+                    [visible]="true"
+                    [showPageSizeSelector]="true"
+                    [allowedPageSizes]="[10, 25, 50, 100]"
+                ></dxo-pager>
+                <dxo-grouping #expand [autoExpandAll]="false" expandMode="rowClick"></dxo-grouping>
+                
+            </dx-data-grid>
         </div>
     </div>
 </div>

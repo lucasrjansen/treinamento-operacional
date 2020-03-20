@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SessionStorageService, EntregadorService } from 'src/app/shared/_services';
 import { Router } from '@angular/router';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Entregador } from 'src/app/shared/_models';
-import { configurarPaginador } from 'src/app/shared/utils';
 import { NotifierService } from 'angular-notifier';
+import { DxDataGridComponent } from 'devextreme-angular';
 
 @Component({
   selector: 'app-entregadores',
@@ -13,11 +12,8 @@ import { NotifierService } from 'angular-notifier';
 })
 export class EntregadoresComponent implements OnInit {
 
-  colunas: string[] = ['id', 'foto', 'nome', 'email', 'acoes'];
-  entregadores = new MatTableDataSource<Entregador>();
-
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(DxDataGridComponent, { static: false }) dataGrid: DxDataGridComponent;
+  entregadores: Entregador[];
 
   constructor(
     private router: Router,
@@ -31,15 +27,20 @@ export class EntregadoresComponent implements OnInit {
     this.buscarEntregadores();
   }
 
-
   buscarEntregadores() {
     this.entregadorService.buscarTodos().subscribe(ret => {
-      this.entregadores.data = ret;
-    });
+      this.entregadores = ret;
+
+    }, err => { },
+      () => {
+        this.dataGrid.dataSource = this.entregadores;
+      }
+    );
   }
 
   editar(entregador: Entregador) {
-    this.sessionStorageService.setValue('editEntregador', entregador)
+    this.sessionStorageService.setValue('editEntregador', entregador);
+    this.router.navigate(['/entregadores-adicionar']);
   }
 
   excluir(entregador: Entregador) {
@@ -55,21 +56,9 @@ export class EntregadoresComponent implements OnInit {
     }, () => {
       if (retorno) {
 
-        this.notifier.notify('error', 'Entregador excluído com Sucesso!');
-        //location.reload();
+        this.notifier.notify('success', 'Entregador excluído com Sucesso!');
+        this.dataGrid.instance.refresh();
       }
     })
   }
-
-  aplicarFiltro(valor: string) {
-    this.entregadores.filter = valor.trim().toLowerCase();
-  }
-
-  configurarPaginador() {
-    this.paginator = configurarPaginador(this.paginator);
-
-    this.entregadores.paginator = this.paginator;
-    this.entregadores.sort = this.sort;
-  }
-
 }

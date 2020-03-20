@@ -23,51 +23,74 @@
         <div class="col-8">
             <dx-data-grid 
                 id="gridContainer" 
-                [dataSource]="encomendasGrid" 
+                [dataSource]="encomendas" 
                 [allowColumnReordering]="true"
                 [showBorders]="true"
                 [rowAlternationEnabled]="true">
 
                 <dxi-column caption="Destinatário" dataField="destinatario.nome" [groupIndex]="0"></dxi-column>
-                <dxi-column [allowFiltering]="false" caption="ID" dataField="id"></dxi-column>
-                <dxi-column [allowFiltering]="false" caption="Entregador" dataField="entregador.nome"></dxi-column>
-                <dxi-column [allowFiltering]="false" caption="Cidade" dataField="destinatario.cidade"></dxi-column>
-                <dxi-column [allowFiltering]="false" caption="Estado" dataField="destinatario.estado"></dxi-column>
+                <dxi-column caption="ID" dataField="id"></dxi-column>
+                <dxi-column caption="Entregador" dataField="entregador.nome"></dxi-column>
+                <dxi-column caption="Cidade" dataField="destinatario.cidade"></dxi-column>
+                <dxi-column caption="Estado" dataField="destinatario.estado"></dxi-column>
                 <dxi-column caption="Status" dataField="status" [width]="100"></dxi-column>
-                
                 <dxi-column 
                     caption="Ações" 
-                    dataField="encomendasGrid" 
+                    dataField="encomendas" 
                     [width]="115" 
                     [allowFiltering]="false"
                     [allowSorting]="false" 
-                    cellTemplate="cellTemplate"
+                    cellTemplate="cellAcoes"
                 ></dxi-column>
 
-                <div *dxTemplate="let data of 'cellTemplate'">
-                    <btn-visualizar (click)="modalInformacoes(data.row.data)" title="Visualizar"></btn-visualizar>
-                    <btn-editar (click)="editar(data.row.data)" title="Editar"></btn-editar>
-                    <btn-excluir (click)="excluir(data.row.data)" title="Excluir"></btn-excluir>
-                    <btn-report-problem (click)="adicionarProblema(data.row.data)" title="Novo Problema"></btn-report-problem>
+                <div *dxTemplate="let data of 'cellAcoes'">
+                    <btn-visualizar 
+                        (click)="modalInformacoes(data.row.data)"
+                        title="Visualizar"
+                    ></btn-visualizar>
+                    <btn-editar 
+                        (click)="editar(data.row.data)"
+                        title="Editar"
+                    ></btn-editar>
+                    <btn-excluir 
+                        (click)="excluir(data.row.data)"
+                        title="Excluir"
+                    ></btn-excluir>
+                    <btn-report-problem 
+                        (click)="adicionarProblema(data.row.data)"
+                        title="Novo Problema"
+                    ></btn-report-problem>
                 </div>
+
+                <dxo-editing mode="row" [allowDeleting]="false">
+                    <dxo-texts 
+                        confirmDeleteMessage="Deseja realmente excluir este registro?"
+                    ></dxo-texts>
+                </dxo-editing>
 
                 <dxo-header-filter 
                     [visible]="true"
                     [allowSearch]="true"
                 ></dxo-header-filter>
+                
                 <dxo-search-panel 
                     [visible]="true" 
                     [width]="240" 
                     placeholder="Buscar por encomenda"
                 ></dxo-search-panel>
+
                 <dxo-paging [pageSize]="10"></dxo-paging>
                 <dxo-pager  
                     [visible]="true"
                     [showPageSizeSelector]="true"
                     [allowedPageSizes]="[10, 25, 50, 100]"
                 ></dxo-pager>
-                <dxo-grouping #expand [autoExpandAll]="false" expandMode="rowClick"></dxo-grouping>
-                
+
+                <dxo-grouping 
+                    #expand 
+                    [autoExpandAll]="false" 
+                    expandMode="rowClick"
+                ></dxo-grouping>
             </dx-data-grid>
         </div>
     </div>

@@ -5,7 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Components
 import { HomeComponent } from './home.component';
-import { PageHeaderModule } from 'src/app/shared/components';
+import { PageHeaderModule, BtnChartChangeModule } from 'src/app/shared/components';
 import { DashboardBarsModule, DashboardPieModule, DashboardLineModule } from 'src/app/shared/components/dashboard/';
 
 @NgModule({
@@ -15,6 +15,7 @@ import { DashboardBarsModule, DashboardPieModule, DashboardLineModule } from 'sr
         FormsModule,
         ReactiveFormsModule,
         PageHeaderModule,
+        BtnChartChangeModule,
         DashboardBarsModule,
         DashboardPieModule,
         DashboardLineModule

@@ -1,4 +1,4 @@
-<div>
+<div class="content">
     <div class="modal-header">
         <h4 class="ml-auto">Informações da Encomenda</h4>
         <a class="close" aria-label="Close" (click)="activeModal.dismiss()">
@@ -7,29 +7,35 @@
     </div>
     <div class="modal-body">
         <div class="row">
-            Rua {{encomenda.destinatario.rua}}, {{encomenda.destinatario.numero}}
+            <div class="col-12">
+                Rua {{encomenda.destinatario.rua}}, {{encomenda.destinatario.numero}}
+            </div>
+            <div class="col-12">
+                {{encomenda.destinatario.cidade}} - {{encomenda.destinatario.estado}}
+            </div>
+            <div class="col-12">
+                {{encomenda.destinatario.cep}}
+            </div>
         </div>
+        <hr>
         <div class="row">
-            {{encomenda.destinatario.cidade}} - {{encomenda.destinatario.estado}}
+            <div class="col-12">
+                <span><b>Retirada:</b></span> {{encomenda.dtRetirada | date:'dd/MM/yyyy'}}
+            </div>
+            <div class="col-12">
+                <span><b>Entrega:</b></span> {{encomenda.dtEntrega | date:'dd/MM/yyyy'}}
+            </div>
         </div>
-
+        <hr>
         <div class="row">
-            {{encomenda.destinatario.cep}}
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-12">
-            <span>Datas</span>
-            <span>Retirada:</span> {{encomenda.dtRetirada || 'dd/MM/yyyy'}}
-            <span>Entrega:</span> {{encomenda.dtEntrega || 'dd/MM/yyyy'}}
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-12">
-            <span>Assinatura do destinátario</span>
-            <img src="../../../../assets/images/assinatura.jpg">
+            <div class="col-12">
+                <span>Assinatura do destinátario</span>
+            </div>
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <img src="../../../../assets/images/assinatura.jpg">
+                </div>
+            </div>
         </div>
     </div>
 </div>

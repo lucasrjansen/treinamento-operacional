@@ -5,3 +5,4 @@ export * from './editar/btn-editar.module';
 export * from './excluir/btn-excluir.module';
 export * from './visualizar/btn-visualizar.module';
 export * from './report-problem/btn-report-problem.module';
+export * from './chart-change/btn-chart-change.module';

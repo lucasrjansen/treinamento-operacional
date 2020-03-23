@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardInfo, EncomendasEntregador, DashboardOptions } from 'src/app/shared/_models/';
-import { DashboardService } from 'src/app/shared/_services';
+import { DashboardService, SessionStorageService } from 'src/app/shared/_services';
 
 @Component({
     selector: 'app-home',
@@ -20,7 +20,10 @@ export class HomeComponent implements OnInit {
 
     carregar = false;
 
-    constructor(private dashboardService: DashboardService) { }
+    constructor(
+        private sessionService: SessionStorageService,
+        private dashboardService: DashboardService
+        ) { }
 
     ngOnInit() {
         this.buscarEncomendasPorEntregador();
@@ -35,24 +38,20 @@ export class HomeComponent implements OnInit {
         this.montarDashboardData();
     }
 
-    buscarElemento(selector: string): Element {
-        return document.querySelector(`#${selector}`);
+    getIcone(buttonId: string): string{
+
+        return this.sessionService.getValue(`BtnChartIcon-${buttonId}`) || 'pie_chart';
     }
 
-    trocarGrafico(iconId: string) {
+    trocarGrafico(buttonId: string) {
 
-        let icon = this.buscarElemento(iconId);
-        icon.textContent = icon.textContent.trim() == 'pie_chart' ? 'bar_chart' : 'pie_chart';
+        let newIcon = this.getIcone(buttonId) == 'pie_chart'? 'bar_chart' : 'pie_chart';      
+        this.sessionService.setValue(`BtnChartIcon-${buttonId}`,newIcon)
     }
 
-    validarGrafico(iconeGrafico: string, iconId: string): Boolean {
+    validarGrafico(iconeGrafico: string, buttonId: string): Boolean {
 
-        let icon = this.buscarElemento(iconId);
-
-        if (iconeGrafico.trim() != icon.textContent.trim()) {
-            return true
-        }
-        return false
+        return this.getIcone(buttonId) != iconeGrafico ? true : false;
     }
 
     montarDashboardData() {

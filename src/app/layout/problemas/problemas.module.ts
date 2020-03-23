@@ -9,6 +9,7 @@ import { ProblemasRoutingModule } from './problemas-routing.module';
 import { VisualizarProblemaComponent } from './visualizar-problema/visualizar-problema.component';
 import { BtnVisualizarModule } from 'src/app/shared/components/buttons';
 import { DxTemplateModule, DxDataGridModule } from 'devextreme-angular';
+import { ValidationPopupModule } from 'src/app/shared/components';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DxTemplateModule, DxDataGridModule } from 'devextreme-angular';
     PageHeaderModule,
     BtnVisualizarModule,
     DxDataGridModule,
-    DxTemplateModule
+    DxTemplateModule,
+    ValidationPopupModule
   ],
   schemas: [
       CUSTOM_ELEMENTS_SCHEMA

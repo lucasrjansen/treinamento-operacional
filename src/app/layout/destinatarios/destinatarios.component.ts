@@ -15,6 +15,9 @@ export class DestinatariosComponent implements OnInit {
   @ViewChild(DxDataGridComponent, { static: false }) dataGrid: DxDataGridComponent;
   destinatarios: Destinatario[];
 
+  abrirPopup: boolean;
+  destinatarioPopup: Destinatario;
+
   constructor(
     private router: Router,
     private sessionStorageService: SessionStorageService,
@@ -47,6 +50,11 @@ export class DestinatariosComponent implements OnInit {
     this.router.navigate(['/destinatarios-adicionar']);
   }
 
+  validarExclusao(destinatario: Destinatario) {
+    this.destinatarioPopup = destinatario;
+    this.abrirPopup = true;
+  }
+
   excluir(destinatario: Destinatario) {
 
     let retorno: Destinatario;
@@ -64,6 +72,14 @@ export class DestinatariosComponent implements OnInit {
         this.dataGrid.instance.refresh();
       }
     });
+  }
+
+  getRetornoValidacao(destinatario: Destinatario){
+    if (destinatario) {
+      this.excluir(destinatario);
+    }
+
+    this.abrirPopup = false;
   }
 
 }

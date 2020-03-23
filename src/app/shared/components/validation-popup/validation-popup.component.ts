@@ -1,26 +1,34 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
 
 @Component({
     selector: 'validation-popup',
     templateUrl: './validation-popup.component.html',
     styleUrls: ['./validation-popup.component.scss']
 })
-export class ValidationPopupComponent{
+export class ValidationPopupComponent implements OnDestroy {
 
-    @Input() heading: string;
-    title: string;
-    visible: boolean;
+    @Input() visible: boolean;
+    @Input() TargetObject: any;
+    @Input() text: string;
+    @Input() title: string;
+    @Input() showTitle: boolean;
+    @Input() leftButton: string = 'SIM';
+    @Input() rightButton: string = 'NÃO';
+    @Output() response = new EventEmitter();
 
-    constructor() {
+    ngOnDestroy(): void {
         this.visible = false;
     }
 
-
-
-    openPopup(){
-
+    yesResponse() {
+        this.response.emit(this.TargetObject);
+        this.ngOnDestroy();
     }
 
-
+    noResponse() {
+        this.response.emit(null);
+        this.ngOnDestroy();
+    }
 }

@@ -53,7 +53,7 @@
                         title="Editar"
                     ></btn-editar>
                     <btn-excluir 
-                        (click)="excluir(data.row.data)"
+                        (click)="validarExclusao(data.row.data)"
                         title="Excluir"
                     ></btn-excluir>
                     <btn-report-problem 
@@ -61,13 +61,7 @@
                         title="Novo Problema"
                     ></btn-report-problem>
                 </div>
-
-                <dxo-editing mode="row" [allowDeleting]="false">
-                    <dxo-texts 
-                        confirmDeleteMessage="Deseja realmente excluir este registro?"
-                    ></dxo-texts>
-                </dxo-editing>
-
+                
                 <dxo-header-filter 
                     [visible]="true"
                     [allowSearch]="true"
@@ -95,3 +89,9 @@
         </div>
     </div>
 </div>
+<validation-popup
+    [visible]="abrirPopup"
+    [TargetObject]="encomendaPopup"
+    text="Deseja realmente excluir este registro?"
+    (response)="getRetornoValidacao($event)"
+></validation-popup>

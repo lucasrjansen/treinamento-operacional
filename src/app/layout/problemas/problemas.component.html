@@ -42,16 +42,11 @@
                         (click)="visualizar(data.row.data)"
                         title="Visualizar"
                     ></btn-visualizar>
-                     <a (click)="cancelarEncomenda(data)">
+
+                    <a (click)="validarCancelarEncomenda(data.row.data)">
                         <i class="material-icons icon icon-excluir"> delete_forever </i>
                     </a>
                 </div>
-
-                <dxo-editing mode="row" [allowDeleting]="false">
-                    <dxo-texts 
-                        confirmDeleteMessage="Deseja realmente excluir este registro?"
-                    ></dxo-texts>
-                </dxo-editing>
                 
                 <dxo-search-panel 
                     [visible]="true" 
@@ -69,3 +64,10 @@
         </div>
     </div>
 </div>
+<validation-popup
+    [visible]="abrirPopup"
+    [TargetObject]="problemaPopup"
+    text="Deseja realmente cancelar esta encomenda?"
+    (response)="getRetornoValidacao($event)"
+></validation-popup>
+

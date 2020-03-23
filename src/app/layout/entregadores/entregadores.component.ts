@@ -15,6 +15,9 @@ export class EntregadoresComponent implements OnInit {
   @ViewChild(DxDataGridComponent, { static: false }) dataGrid: DxDataGridComponent;
   entregadores: Entregador[];
 
+  abrirPopup: boolean;
+  entregadorPopup: Entregador;
+
   constructor(
     private router: Router,
     private sessionStorageService: SessionStorageService,
@@ -23,14 +26,14 @@ export class EntregadoresComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.abrirPopup = false;
     this.buscarEntregadores();
   }
 
   buscarEntregadores() {
     this.entregadorService.buscarTodos().subscribe(ret => {
       this.entregadores = ret;
-
+      
     }, err => { },
       () => {
         this.dataGrid.dataSource = this.entregadores;
@@ -41,6 +44,11 @@ export class EntregadoresComponent implements OnInit {
   editar(entregador: Entregador) {
     this.sessionStorageService.setValue('editEntregador', entregador);
     this.router.navigate(['/entregadores-adicionar']);
+  }
+
+  validarExclusao(entregador: Entregador) {
+    this.entregadorPopup = entregador;
+    this.abrirPopup = true;
   }
 
   excluir(entregador: Entregador) {
@@ -61,4 +69,15 @@ export class EntregadoresComponent implements OnInit {
       }
     })
   }
+
+  getRetornoValidacao(entregadorResposta: Entregador) {
+    if (entregadorResposta) {
+      this.excluir(entregadorResposta);
+      console.log(entregadorResposta);
+      
+    }
+
+    this.abrirPopup = false;
+  }
+
 }

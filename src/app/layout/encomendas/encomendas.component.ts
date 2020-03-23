@@ -19,6 +19,9 @@ export class EncomendasComponent implements OnInit {
   @ViewChild(DxDataGridComponent, { static: false }) dataGrid: DxDataGridComponent;
   encomendas: Encomenda[];
 
+  abrirPopup: boolean;
+  encomendaPopup: Encomenda;
+
   constructor(
     private modalService: NgbModal,
     private router: Router,
@@ -54,6 +57,11 @@ export class EncomendasComponent implements OnInit {
     this.router.navigate(['/encomendas-adicionar']);
   }
 
+  validarExclusao(encomenda: Encomenda) {
+    this.encomendaPopup = encomenda;
+    this.abrirPopup = true;
+  }
+
   excluir(encomenda: Encomenda) {
 
     let retorno: Encomenda;
@@ -77,6 +85,15 @@ export class EncomendasComponent implements OnInit {
   adicionarProblema(encomenda: Encomenda) {
     this.sessionStorageService.setValue('cadProblema', encomenda);
     this.router.navigate(['/problemas-adicionar']);
+  }
+
+  getRetornoValidacao(encomenda: Encomenda) {
+
+    if (encomenda) {
+      this.excluir(encomenda);      
+    }
+
+    this.abrirPopup = false;
   }
 
 }

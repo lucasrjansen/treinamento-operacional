@@ -8,6 +8,7 @@ import { DestinatariosRoutingModule } from './destinatarios-routing.module';
 
 import { BtnCadastrarModule, BtnEditarModule, BtnExcluirModule, BtnVisualizarModule } from 'src/app/shared/components/buttons';
 import { DxTemplateModule, DxDataGridModule } from 'devextreme-angular';
+import { ValidationPopupModule } from 'src/app/shared/components';
 
 @NgModule({
   declarations: [
@@ -24,10 +25,11 @@ import { DxTemplateModule, DxDataGridModule } from 'devextreme-angular';
     BtnVisualizarModule,
     NgbModule,
     DxTemplateModule,
-     DxDataGridModule
+    DxDataGridModule,
+    ValidationPopupModule
   ],
   schemas: [
-      CUSTOM_ELEMENTS_SCHEMA
+    CUSTOM_ELEMENTS_SCHEMA
   ]
 })
 export class DestinatariosModule { }

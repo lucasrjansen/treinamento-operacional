@@ -20,34 +20,6 @@
       "foto": null,
       "email": "teste",
       "senha": "senha"
-    },
-    {
-      "id": 3,
-      "nome": "teste",
-      "foto": null,
-      "email": "teste",
-      "senha": "senha"
-    },
-    {
-      "id": 3,
-      "nome": "teste",
-      "foto": null,
-      "email": "teste",
-      "senha": "senha"
-    },
-    {
-      "id": 3,
-      "nome": "teste",
-      "foto": null,
-      "email": "teste",
-      "senha": "senha"
-    },
-    {
-      "id": 3,
-      "nome": "teste",
-      "foto": null,
-      "email": "teste",
-      "senha": "senha"
     }
   ],
   "destinatario": [
@@ -96,30 +68,6 @@
       "status": "PENDENTE",
       "dtRetirada": "2020-03-20T11:46:43.068Z",
       "dtEntrega": "2020-03-20T11:46:43.068Z"
-    },
-    {
-      "id": 2,
-      "destinatario": {
-        "id": 5,
-        "nome": "GABRIEL",
-        "rua": "tamo ai",
-        "numero": "22",
-        "complemento": null,
-        "cidade": "Apiuna",
-        "estado": "Santa Catarina",
-        "cep": "89135000"
-      },
-      "entregador": {
-        "id": 2,
-        "nome": "Lucas Janzen",
-        "foto": null,
-        "email": "lucas.janzen@gmail.com",
-        "senha": "senha"
-      },
-      "produto": "teste",
-      "status": "PENDENTE",
-      "dtRetirada": "2020-03-20T11:44:08.339Z",
-      "dtEntrega": "2020-03-20T11:44:08.339Z"
     },
     {
       "id": 2,

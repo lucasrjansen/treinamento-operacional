@@ -16,6 +16,9 @@ export class ProblemasComponent implements OnInit {
   @ViewChild(DxDataGridComponent, { static: false }) dataGrid: DxDataGridComponent;
   problemas: Problema[];
 
+  abrirPopup: boolean;
+  problemaPopup: Problema;
+
   constructor(
     private modalService: NgbModal,
     private problemaService: ProblemaService,
@@ -42,6 +45,11 @@ export class ProblemasComponent implements OnInit {
 
     const modalRef = this.modalService.open(VisualizarProblemaComponent);
     modalRef.componentInstance.problema = problema.descricao;
+  }
+
+  validarCancelarEncomenda(problema: Problema){
+    this.problemaPopup = problema;
+    this.abrirPopup = true;
   }
 
   cancelarEncomenda(problema: Problema) {
@@ -74,6 +82,15 @@ export class ProblemasComponent implements OnInit {
       dtEntrega: new Date(),
       dtRetirada: new Date()
     }
+  }
+
+  getRetornoValidacao(problema: Problema){
+    
+    if (problema) {
+      this.cancelarEncomenda(problema);      
+    }
+
+    this.abrirPopup = false;
   }
 
 }

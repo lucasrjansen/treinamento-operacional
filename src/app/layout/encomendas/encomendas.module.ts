@@ -9,6 +9,7 @@ import { EncomendasRoutingModule } from './encomendas-routing.module';
 import { BtnCadastrarModule, BtnEditarModule, BtnExcluirModule, BtnVisualizarModule, BtnReportProblemModule} from 'src/app/shared/components/buttons';
 import { VisualizarEncomendaComponent } from './visualizar-encomenda/visualizar-encomenda.component';
 import { DxDataGridModule, DxTemplateModule } from 'devextreme-angular';
+import { ValidationPopupModule } from 'src/app/shared/components';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { DxDataGridModule, DxTemplateModule } from 'devextreme-angular';
     BtnVisualizarModule,
     BtnReportProblemModule,
     DxDataGridModule,
-    DxTemplateModule
+    DxTemplateModule,
+    ValidationPopupModule
   ],
   schemas: [
       CUSTOM_ELEMENTS_SCHEMA

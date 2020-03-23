@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
 
   validarCredenciais() {
 
+    let logou = false;
     let retorno: Entregador[];
     this.authenticador.autenticar(this.credenciais).subscribe(ret => {
       retorno = ret;
@@ -61,13 +62,14 @@ export class LoginComponent implements OnInit {
 
             this.router.navigate(['/home']);
             this.sessionStorage.setValue('localUser', ret);
-
-          } else {
-            this.notifier.notify("error", "Usuário Inválido");
-
+            logou = true;
           }
         })
-      });
+        
+        if (!logou) {
+          this.notifier.notify("error", "Usuário Inválido");
+        }
+      }
+    );
   }
-
 }

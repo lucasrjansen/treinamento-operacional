@@ -8,6 +8,7 @@ export interface Encomenda {
     entregador: Entregador,
     produto: string,
     status: string
+    dtPedido: Date;
     dtEntrega: Date;
     dtRetirada: Date;
 }

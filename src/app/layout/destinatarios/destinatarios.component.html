@@ -62,6 +62,11 @@
                         (click)="validarExclusao(data.row.data)"
                         title="Excluir"
                      ></btn-excluir>
+
+                     <btn-visualizar 
+                        title="Visualizar Timeline das encomendas"
+                        (click)="abrirTimeline(data.row.data)"
+                     ></btn-visualizar>
                 </div>
                 
                 <dxo-search-panel 

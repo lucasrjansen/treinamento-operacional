@@ -66,6 +66,7 @@
       },
       "produto": "sss",
       "status": "PENDENTE",
+      "dtPedido": "2020-03-20",
       "dtRetirada": "2020-03-20T11:46:43.068Z",
       "dtEntrega": "2020-03-20T11:46:43.068Z"
     },
@@ -90,6 +91,7 @@
       },
       "produto": "teste",
       "status": "PENDENTE",
+      "dtPedido": "2020-03-20",
       "dtRetirada": "2020-03-20T11:44:08.339Z",
       "dtEntrega": "2020-03-20T11:44:08.339Z"
     },
@@ -114,6 +116,7 @@
       },
       "produto": "teste",
       "status": "PENDENTE",
+      "dtPedido": "2020-03-20",
       "dtRetirada": "2020-03-20T11:44:08.339Z",
       "dtEntrega": "2020-03-20T11:44:08.339Z"
     },
@@ -138,6 +141,7 @@
       },
       "produto": "teste",
       "status": "PENDENTE",
+      "dtPedido": "2020-03-20",
       "dtRetirada": "2020-03-20T11:44:08.339Z",
       "dtEntrega": "2020-03-20T11:44:08.339Z"
     },
@@ -162,6 +166,7 @@
       },
       "produto": "teste",
       "status": "PENDENTE",
+      "dtPedido": "2020-03-20",
       "dtRetirada": "2020-03-20T11:44:08.339Z",
       "dtEntrega": "2020-03-20T11:44:08.339Z"
     },
@@ -186,6 +191,7 @@
       },
       "produto": "teste",
       "status": "PENDENTE",
+      "dtPedido": "2020-03-20",
       "dtRetirada": "2020-03-20T11:44:08.339Z",
       "dtEntrega": "2020-03-20T11:44:08.339Z"
     },
@@ -210,6 +216,7 @@
       },
       "produto": "teste",
       "status": "PENDENTE",
+      "dtPedido": "2020-03-20",
       "dtRetirada": "2020-03-20T11:44:08.339Z",
       "dtEntrega": "2020-03-20T11:44:08.339Z"
     }

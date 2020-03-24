@@ -16,6 +16,7 @@ const routes: Routes = [
             { path: 'entregadores-adicionar', loadChildren: () => import('./entregadores/entregadores-adicionar/entregadores-adicionar.module').then(m => m.EntregadoresAdicionarModule), canActivate: [AuthGuard] },
             { path: 'destinatarios', loadChildren: () => import('./destinatarios/destinatarios.module').then(m => m.DestinatariosModule), canActivate: [AuthGuard] },
             { path: 'destinatarios-adicionar', loadChildren: () => import('./destinatarios/destinatarios-adicionar/destinatarios-adicionar.module').then(m => m.DestinatariosAdicionarModule), canActivate: [AuthGuard] },
+            { path: 'destinatarios-timeline', loadChildren: () => import('./destinatarios/timeline/destinatarios-timeline.module').then(m => m.DestinatariosTimeLineModule), canActivate: [AuthGuard] },
             { path: 'problemas', loadChildren: () => import('./problemas/problemas.module').then(m => m.ProblemasModule), canActivate: [AuthGuard] },
             { path: 'problemas-adicionar', loadChildren: () => import('./problemas/problemas-adicionar/problemas-adicionar.module').then(m => m.ProblemasAdicionarModule), canActivate: [AuthGuard] },
         ]

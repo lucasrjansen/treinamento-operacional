@@ -79,6 +79,7 @@ export class ProblemasComponent implements OnInit {
       entregador: problema.encomenda.entregador,
       produto: problema.encomenda.produto,
       status: 'CANCELADO',
+      dtPedido: new Date(),
       dtEntrega: new Date(),
       dtRetirada: new Date()
     }

@@ -6,3 +6,4 @@ export * from './Problema';
 export * from './DashboardOptions';
 export * from './DashboardInfo';
 export * from './EncomendasEntregador';
+export * from './TimelineItem';

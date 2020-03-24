@@ -104,6 +104,7 @@ export class EncomendasAdicionarComponent implements OnInit, OnDestroy {
             entregador: this.montarEntregador(),
             produto: this.form.value.produto,
             status: 'PENDENTE',
+            dtPedido: new Date(),
             dtRetirada: new Date(),
             dtEntrega: new Date()
         };

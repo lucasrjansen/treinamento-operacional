@@ -41,7 +41,7 @@ export class DestinatariosComponent implements OnInit {
     );
   }
 
-  montaEndereco(endereco): string{    
+  montaEndereco(endereco): string {
     return `Rua ${endereco.rua}, ${endereco.numero}, ${endereco.cidade} - ${endereco.estado}`;
   }
 
@@ -74,12 +74,17 @@ export class DestinatariosComponent implements OnInit {
     });
   }
 
-  getRetornoValidacao(destinatario: Destinatario){
+  getRetornoValidacao(destinatario: Destinatario) {
     if (destinatario) {
       this.excluir(destinatario);
     }
 
     this.abrirPopup = false;
+  }
+
+  abrirTimeline(destinatario: Destinatario) {
+    this.sessionStorageService.setValue('timelineDestinatario', destinatario);
+    this.router.navigate(['/destinatarios-timeline']);
   }
 
 }

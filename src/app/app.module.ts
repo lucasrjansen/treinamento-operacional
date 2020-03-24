@@ -11,6 +11,11 @@ import { AuthenticationService, SessionStorageService } from './shared/_services
 import { NotifierModule } from 'angular-notifier';
 import { confNotifier } from 'src/app/shared/config/Conf-Notifier';
 
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+registerLocaleData(localePt);
+
 @NgModule({
   imports: [
     CommonModule,
@@ -25,6 +30,7 @@ import { confNotifier } from 'src/app/shared/config/Conf-Notifier';
     AppComponent,
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
     SessionStorageService,
     AuthenticationService
   ],
